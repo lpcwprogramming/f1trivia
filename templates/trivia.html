@@ -9,13 +9,20 @@
     <link rel="stylesheet" href="../assets/css/fontawesome.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;700;900" />
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <py-env>
+        - random
+    </py-env>
 </head>
 <body>
+
 <!-- ////////////////////////////////////////////////////////////////////////////////////////
                                START SECTION 1 - THE NAVBAR SECTION  
 /////////////////////////////////////////////////////////////////////////////////////////////-->
+
 <nav class="navbar navbar-expand-lg navbar-dark menu shadow fixed-top">
     <div class="container">
       <a class="navbar-brand" href="#">
@@ -35,5 +42,70 @@
         </ul>
       </div>
     </div>
-  </nav>
-  </body>
+</nav>
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////
+                               START SECTION - TRIVIA
+/////////////////////////////////////////////////////////////////////////////////////////////-->
+<section>
+    <div></div>
+        <py-script>
+            import random
+
+            class Question:
+                def __init__(self, questionText, answer, alternateAnswers=None):
+                self.questionText = questionText
+                self.answer = answer
+                self.alternateAnswers = alternateAnswers
+ 
+            def __repr__(self):
+            return '{'+ self.questionText +', '+ self.answer +', '+ str(self.alternateAnswers) +'}'
+
+
+            quizQuestions = [
+            Question("Who won the championship in 2000", "Michael Schumacher"),
+            Question("Who won the championship in 2001", "Michael Schumacher"),
+            Question("Who won the championship in 2002", "Michael Schumacher"),
+            Question("Who won the championship in 2003", "Michael Schumacher"),
+            Question("Who won the championship in 2004", "Michael Schumacher"),
+            Question("Who won the championship in 2005", "Fernando Alonso"),
+            Question("Who won the championship in 2006", "Fernando Alonso"),
+            Question("Who won the championship in 2007", "Kimi Räikkönen"),
+            Question("Who won the championship in 2008", "Lewis Hamilton"),
+            Question("Who won the championship in 2009", "Jenson Button"),
+            Question("Who won the championship in 2010", "Sebastian Vettel"),
+            Question("Who won the championship in 2011", "Sebastian Vettel"),
+            Question("Who won the championship in 2012", "Sebastian Vettel"),
+            Question("Who won the championship in 2013", "Sebastian Vettel"),
+            Question("Who won the championship in 2014", "Lewis Hamilton"),
+            Question("Who won the championship in 2015", "Lewis Hamilton"),
+            Question("Who won the championship in 2016", "Nico Rosberg"),
+            Question("Who won the championship in 2017", "Lewis Hamilton"),
+            Question("Who won the championship in 2018", "Lewis Hamilton"),
+            Question("Who won the championship in 2019", "Lewis Hamilton"),
+            Question("Who won the championship in 2020", "Lewis Hamilton"),
+            Question("Who won the championship in 2021", "Max Verstappen"),
+            ]
+
+            user_play = "y"
+
+            while user_play == "y":
+
+            for question in quizQuestions:
+                random.shuffle(quizQuestions)
+                print(f"{question.questionText}?")
+                userInput = input()
+
+            if (userInput.lower() == question.answer.lower()):
+                print("That is correct!")
+
+            else:
+                print(f"Sorry, the correct answer is {question.answer}.")
+    
+            user_play = input("Answer another question: (y)es or (n)o? ")
+        </py-script>
+</section>
+
+
+</body>
+</html>
