@@ -5,14 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lee's F1 Trivia</title>
-    <link rel="stylesheet" href="../static/assets/css/style.css">
-    <link rel="stylesheet" href="../static/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="../../static/assets/css/style.css">
+    <link rel="stylesheet" href="../../static/assets/css/fontawesome.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;700;900" />
-    <link rel="stylesheet" href="../static/assets/python/pyscript-main/pyscriptjs/src/styles/pyscript_base.css" />
     <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
     <script defer src="https://pyscript.net/latest/pyscript.js"></script>
     <py-en>
         -random
+        -paths:
+            -/../static/assets/python/trivia_questions.py 
     </py-en>
 </head>
 <body>
@@ -24,7 +25,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark menu shadow fixed-top">
     <div class="container">
       <a class="navbar-brand" href="#">
-        <img src="../static/images/arts/31.png" width="60" height="60">
+        <img src="../../static/images/arts/31.png" width="60" height="60">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -33,8 +34,6 @@
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="https://lpcwprogramming.github.io/f1trivia/index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link active" aria-current="page" href="https://lpcwprogramming.github.io/f1trivia/static/templates/trivia.html">Trivia</a></li>
-          <li class="nav-item"><a class="nav-link" href="https://lpcwprogramming.github.io/f1trivia/static/templates/faq.html">FAQ</a></li>
-          <li class="nav-item"><a class="nav-link" href="https://lpcwprogramming.github.io/f1trivia/static/templates/portfolio.html">Portfolio</a></li>
           </li>
         </ul>
       </div>
@@ -44,66 +43,26 @@
 <!-- ////////////////////////////////////////////////////////////////////////////////////////
                                START SECTION - TRIVIA
 /////////////////////////////////////////////////////////////////////////////////////////////-->
-<section>
-    <div>
-        <py-script>
-        import random 
+<section id="trivia">
+    <main>
+        <div class="container">
+            <h1 class="h1">Lee's Trivia Extravaganza</h1>
+            <div>
+            <span class="display-2--description lh-base">Can you get them all?</span><span>&nbsp;more</span>
+            </div>
+                <py-script>
+                from countdown import get_time
+                import asyncio
 
-        class Question:
-            def __init__(self, questionText, answer, alternateAnswers=None):
-                self.questionText = questionText
-                self.answer = answer
-                self.alternateAnswers = alternateAnswers
-        
-            def __repr__(self):
-                return '{'+ self.questionText +', '+ self.answer +', '+ str(self.alternateAnswers) +'}'
+                async def tell_time():
+                while True:
+                time_p = Element('time_p').write(get_time())
+                await asyncio.sleep(1)
 
-
-            quizQuestions = [
-            Question("Who won the championship in 2000", "Michael Schumacher"),
-            Question("Who won the championship in 2001", "Michael Schumacher"),
-            Question("Who won the championship in 2002", "Michael Schumacher"),
-            Question("Who won the championship in 2003", "Michael Schumacher"),
-            Question("Who won the championship in 2004", "Michael Schumacher"),
-            Question("Who won the championship in 2005", "Fernando Alonso"),
-            Question("Who won the championship in 2006", "Fernando Alonso"),
-            Question("Who won the championship in 2007", "Kimi Räikkönen"),
-            Question("Who won the championship in 2008", "Lewis Hamilton"),
-            Question("Who won the championship in 2009", "Jenson Button"),
-            Question("Who won the championship in 2010", "Sebastian Vettel"),
-            Question("Who won the championship in 2011", "Sebastian Vettel"),
-            Question("Who won the championship in 2012", "Sebastian Vettel"),
-            Question("Who won the championship in 2013", "Sebastian Vettel"),
-            Question("Who won the championship in 2014", "Lewis Hamilton"),
-            Question("Who won the championship in 2015", "Lewis Hamilton"),
-            Question("Who won the championship in 2016", "Nico Rosberg"),
-            Question("Who won the championship in 2017", "Lewis Hamilton"),
-            Question("Who won the championship in 2018", "Lewis Hamilton"),
-            Question("Who won the championship in 2019", "Lewis Hamilton"),
-            Question("Who won the championship in 2020", "Lewis Hamilton"),
-            Question("Who won the championship in 2021", "Max Verstappen"),
-            ]
-
-        while user_play == "y":
-
-            for question in quizQuestions:
-                random.shuffle(quizQuestions)
-                print(f"{question.questionText}?")
-                userInput = input()
-
-                if (userInput.lower() == question.answer.lower()):
-                    print("That is correct!")
-
-                else:
-                    print(f"Sorry, the correct answer is {question.answer}.")
-            
-                user_play = input("Answer another question: (y)es or (n)o? ")
-
-                if user_play == "n":
-                    break
-        print("Thanks for playing, Lee!")
-        </py-script>
-    </div>
+                pyscript.run_until_complete(tell_time())
+                </py-script>
+        </div>
+    </main>
 </section>
 </body>
 </html>
