@@ -51,4 +51,8 @@ while user_play == "y":
         else:
             print(f"Sorry, the correct answer is {question.answer}.")
     
-            user_play = input("Answer another question: (y)es or (n)o? ")
+        user_play = input("Answer another question: (y)es or (n)o? ")
+
+        if user_play == "n":
+            break
+print("Thanks for playing, Lee!")
